@@ -35,8 +35,9 @@ module.exports = function (grunt) {
 
 		async.eachLimit(tasks, opts.limit, function (task, next) {
 			var cp = grunt.util.spawn({
-				grunt: true,
-				args: arrify(task).concat(flags),
+				cmd: "node",
+				// grunt: true,
+				args: ['--stack-size=20000', '--max_old_space_size=3072', './node_modules/.bin/grunt'].concat(arrify(task).concat(flags)),
 				opts: {
 					stdio: ['ignore', 'pipe', 'pipe']
 				}
